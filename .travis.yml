@@ -1,0 +1,11 @@
+sudo: false
+
+language: go
+go:
+  - 1.7.x
+  - tip
+
+script:
+- go build
+- ./domain_exporter -config test/whois_servers_list
+
