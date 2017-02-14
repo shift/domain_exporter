@@ -1,11 +1,26 @@
 sudo: false
-
 language: go
 go:
-  - 1.7.x
-  - tip
-
+- 1.7.x
+- tip
 script:
-- go build
-- ./domain_exporter -config test/whois_servers_list
-
+- make
+deploy:
+  provider: releases
+  api_key:
+    secure: HYz+PdM323swYdUmzglxHajJGuXcfoGrqunHE7n1FsOMiPfG5Pu/tHZ9hBysx2YWXi+fGrBlPlTuU8T/Mc1qYI0V2CEjrG630LeuuEfveweR1ilRe007tSOLmXdv0CBEKddSq2jkIMs+LDZg/ecnIa6MiZDruF22ngsI/l8aKtyRwZVz3FQkAAkTEmng6+MqxZfFaKrG5Ff/fFA8u7ELg+Gqewyf1QQ/QSsKiwsl1roOPJl/wEI7DD+sGbkqPZCNDG5LQ4uEJbLmK0odC/QTLY3DASMfWoas+oMRF09TEBIHyo7oPBLQldzkhfluNe3y5VFbyvfHOKzgtd6L9aYuIWjZD9wtBaf+UD2loTVIsBqj/HMUikftE1kch+Wvu02kTCReX9gwAxasgC0p8uA91NsOR/2ItdqqE8t8Qv4ATJfs3hqJdoYPfqaF3DcmO5HUQRUOcOa6EapGUkwqSc19iLenUbAAczDL+8gehPvfeH0GsCrTlsiiqykvs0hWcSAEvJWqjfGvE4pxQsTTC7vP/shMee65z31xPcpR5X0OdseCm+pQRBbNsuqNH7L6A/Ulgs9KRGlsPLEjpcrLEQDoAsG+EOnjaQ25rvporBqbPGKDm4Xd7e2y8iuw1MvO99uFBpgWOyntlj4v9vEIYb/opIIygVVPlXYSZOUz2j0plrc=
+  file:
+  - release/domain_exporter-netbsd-amd64
+  - release/domain_exporter-linux-mips64
+  - release/domain_exporter-linux-arm
+  - release/domain_exporter-freebsd-amd64
+  - release/domain_exporter-darwin-amd64
+  - release/domain_exporter-linux-mip64le
+  - release/domain_exporter-linux-amd64
+  - release/domain_exporter-linux-arm64
+  - release/domain_exporter-linux-386
+  - release/domain_exporter-openbsd-amd64
+  - release/domain_exporter-windows-amd64
+  on:
+    repo: shift/domain_exporter
+    tags: true
