@@ -3,6 +3,7 @@ package = github.com/shift/domain_exporter
 .PHONY: release
 
 release:
+	go get
 	mkdir -p release
 	GOOS=linux GOARCH=amd64 go build -o release/domain_exporter-linux-amd64 $(package)
 	GOOS=linux GOARCH=386 go build -o release/domain_exporter-linux-386 $(package)
