@@ -45,7 +45,7 @@ type Config struct {
 }
 
 func main() {
-	flag.StringVar(&httpBind, "bind", ":9080", "Port to expose the /metrics endpoint on")
+	flag.StringVar(&httpBind, "bind", ":9203", "Port to expose the /metrics endpoint on")
 	flag.StringVar(&configFile, "config", "./config", "Path to configuration file")
 	flag.Parse()
 	prometheus.Register(domainExpiration)

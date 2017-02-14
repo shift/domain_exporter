@@ -12,7 +12,7 @@ Flags:
 ````bash
 Usage of ./domain_exporter:
   -bind string
-        Port to expose the /metrics endpoint on (default ":9080")
+        Port to expose the /metrics endpoint on (default ":9203")
   -config string
         Path to configuration file (default "./config")
 
