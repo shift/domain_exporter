@@ -4,6 +4,7 @@ go:
 - 1.7.x
 - tip
 script:
+- go build
 - make
 deploy:
   provider: releases
