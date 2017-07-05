@@ -37,6 +37,7 @@ var (
 		"2006-01-02 15:04:05 MST",
 		"2006/01/02",
 		"Mon Jan 2006 15:04:05",
+		"2006-01-02 15:04:05-07",
 	}
 )
 
@@ -77,7 +78,7 @@ func main() {
 				if err != nil {
 					log.Print(err)
 				} else {
-					re, err := regexp.Compile(`(Registry Expiry Date|paid-till|Expiration Date|Expiry.*): (.*)`)
+					re, err := regexp.Compile(`(Registry Expiry Date|paid-till|Expiration Date|Expiry.*|expires.*): (.*)`)
 					if err != nil {
 						log.Print(err)
 					} else {
