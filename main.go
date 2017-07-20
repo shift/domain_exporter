@@ -78,7 +78,7 @@ func main() {
 				if err != nil {
 					log.Print(err)
 				} else {
-					re, err := regexp.Compile(`(Registry Expiry Date|paid-till|Expiration Date|Expiry.*|expires.*): (.*)`)
+					re, err := regexp.Compile(`(?i)(Registry Expiry Date|paid-till|Expiration Date|Expiry.*|expires.*): (.*)`)
 					if err != nil {
 						log.Print(err)
 					} else {
