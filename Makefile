@@ -16,3 +16,8 @@ release:
 	GOOS=netbsd GOARCH=amd64 go build -o release/domain_exporter-netbsd-amd64 $(package)
 	GOOS=openbsd GOARCH=amd64 go build -o release/domain_exporter-openbsd-amd64 $(package)
 	GOOS=windows GOARCH=amd64 go build -o release/domain_exporter-windows-amd64 $(package)
+
+containerise:
+	mkdir -p docker
+	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o docker/domain_exporter .
+	docker build -t domain_exporter
