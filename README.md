@@ -17,3 +17,7 @@ Usage of ./domain_exporter:
         Path to configuration file (default "./config")
 
 ````
+
+### Docker image
+
+We publish a docker image [on the docker hub](https://hub.docker.com/r/shift/domain_exporter/). You can pull this with `docker pull shift/domain_exporter`.
