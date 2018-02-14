@@ -1,8 +1,7 @@
 sudo: false
 language: go
 go:
-- 1.7.x
-- tip
+- 1.9.x
 script:
 - make
 deploy:
