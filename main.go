@@ -3,10 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/shift/whois"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"math"
@@ -15,11 +11,20 @@ import (
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/shift/whois"
+	"gopkg.in/yaml.v2"
 )
 
 var (
+	// How often to check domains
+	checkRate = 12 * time.Hour
+
 	httpBind         string
 	configFile       string
+
 	domainExpiration = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name: "domain_expiration",
@@ -27,6 +32,9 @@ var (
 		},
 		[]string{"domain"},
 	)
+
+	expiryRegex = regexp.MustCompile(`(?i)(Registry Expiry Date|paid-till|Expiration Date|Expiry.*|expires.*): (.*)`)
+
 	formats = []string{
 		"2006-01-02",
 		"2006-01-02T15:04:05Z",
@@ -77,37 +85,37 @@ func main() {
 				res, err = whois.DefaultClient.Fetch(req)
 				if err != nil {
 					log.Print(err)
-				} else {
-					re, err := regexp.Compile(`(?i)(Registry Expiry Date|paid-till|Expiration Date|Expiry.*|expires.*): (.*)`)
-					if err != nil {
-						log.Print(err)
-					} else {
-						result := re.FindStringSubmatch(res.String())
+					continue
 
-						if len(result) < 2 {
-							log.Print(fmt.Sprintf("Don't know how to parse domain: %s\n", query))
-						} else {
-							parsed := false
-							for _, format := range formats {
-								if date, err := time.Parse(format, strings.TrimSpace(result[2])); err == nil {
-									days := math.Floor(date.Sub(time.Now()).Hours() / 24)
-									log.Print(fmt.Sprintf("Domain: %s, Days: %v, Date: %s", query, days, date))
-									domainExpiration.WithLabelValues(query).Set(days)
-									parsed = true
-									break
-								}
+				}
 
-							}
-							if parsed == false {
-								log.Print(fmt.Sprintf("Unable to parse date: %s, for %s\n", strings.TrimSpace(result[2]), query))
-							}
-						}
+				result := expiryRegex.FindStringSubmatch(res.String())
+
+				if len(result) < 2 {
+					log.Print(fmt.Sprintf("Don't know how to parse domain: %s\n", query))
+					continue
+				}
+
+				parsed := false
+				for _, format := range formats {
+					if date, err := time.Parse(format, strings.TrimSpace(result[2])); err == nil {
+						days := math.Floor(date.Sub(time.Now()).Hours() / 24)
+						log.Print(fmt.Sprintf("Domain: %s, Days: %v, Date: %s", query, days, date))
+						domainExpiration.WithLabelValues(query).Set(days)
+						parsed = true
+						break
 					}
+
+				}
+				if !parsed {
+					log.Print(fmt.Sprintf("Unable to parse date: %s, for %s\n", strings.TrimSpace(result[2]), query))
 				}
 			}
 			time.Sleep(12 * time.Hour)
 		}
 	}()
 	http.Handle("/metrics", promhttp.Handler())
+
+	log.Printf("Listening on %s\n", httpBind)
 	log.Fatal(http.ListenAndServe(httpBind, nil))
 }
