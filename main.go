@@ -158,19 +158,14 @@ func lookup(domain string, handler *prometheus.GaugeVec, logger log.Logger) (flo
 		return -1, nil
 	}
 
-	parsed := false
 	for _, format := range formats {
 		if date, err := time.Parse(format, strings.TrimSpace(result[2])); err == nil {
 			days := math.Floor(date.Sub(time.Now()).Hours() / 24)
-			level.Warn(logger).Log("warn", fmt.Sprintf("Domain: %s, Days: %v, Date: %s", domain, days, date))
+			level.Info(logger).Log("domain:", domain, "days", days, "date", date)
 			handler.WithLabelValues(domain).Set(days)
-			parsed = true
 			return days, nil
 		}
 
 	}
-	if !parsed {
-		return -1, errors.New(fmt.Sprintf("Unable to parse date: %s, for %s\n", strings.TrimSpace(result[2]), domain))
-	}
-	return -1, errors.New("Woah there, this shouldn't happen")
+	return -1, errors.New(fmt.Sprintf("Unable to parse date: %s, for %s\n", strings.TrimSpace(result[2]), domain))
 }
