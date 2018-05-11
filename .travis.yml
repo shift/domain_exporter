@@ -1,32 +1,26 @@
-sudo: false
 language: go
 go:
 - 1.7.x
 - 1.8.x
 - 1.9.x
+- 1.10.x
 - tip
 matrix:
   allow_failures:
-    - go: 1.7.x
-    - go: tip
-script:
-- make
+  - go: 1.7.x
+  - go: tip
+services:
+- docker
 deploy:
-  provider: releases
-  api_key:
-    secure: HYz+PdM323swYdUmzglxHajJGuXcfoGrqunHE7n1FsOMiPfG5Pu/tHZ9hBysx2YWXi+fGrBlPlTuU8T/Mc1qYI0V2CEjrG630LeuuEfveweR1ilRe007tSOLmXdv0CBEKddSq2jkIMs+LDZg/ecnIa6MiZDruF22ngsI/l8aKtyRwZVz3FQkAAkTEmng6+MqxZfFaKrG5Ff/fFA8u7ELg+Gqewyf1QQ/QSsKiwsl1roOPJl/wEI7DD+sGbkqPZCNDG5LQ4uEJbLmK0odC/QTLY3DASMfWoas+oMRF09TEBIHyo7oPBLQldzkhfluNe3y5VFbyvfHOKzgtd6L9aYuIWjZD9wtBaf+UD2loTVIsBqj/HMUikftE1kch+Wvu02kTCReX9gwAxasgC0p8uA91NsOR/2ItdqqE8t8Qv4ATJfs3hqJdoYPfqaF3DcmO5HUQRUOcOa6EapGUkwqSc19iLenUbAAczDL+8gehPvfeH0GsCrTlsiiqykvs0hWcSAEvJWqjfGvE4pxQsTTC7vP/shMee65z31xPcpR5X0OdseCm+pQRBbNsuqNH7L6A/Ulgs9KRGlsPLEjpcrLEQDoAsG+EOnjaQ25rvporBqbPGKDm4Xd7e2y8iuw1MvO99uFBpgWOyntlj4v9vEIYb/opIIygVVPlXYSZOUz2j0plrc=
-  file:
-  - release/domain_exporter-netbsd-amd64
-  - release/domain_exporter-linux-mips64
-  - release/domain_exporter-linux-arm
-  - release/domain_exporter-freebsd-amd64
-  - release/domain_exporter-darwin-amd64
-  - release/domain_exporter-linux-mip64le
-  - release/domain_exporter-linux-amd64
-  - release/domain_exporter-linux-arm64
-  - release/domain_exporter-linux-386
-  - release/domain_exporter-openbsd-amd64
-  - release/domain_exporter-windows-amd64
+- provider: script
+  skip_cleanup: true
+  script: bash deploy.sh
   on:
-    repo: shift/domain_exporter
     tags: true
+    condition: "$TRAVIS_OS_NAME = linux"
+    repo: shift/domain_exporter
+env:
+  global:
+  - secure: DMvr+zAxJnYM4XOV8pL5AIcNquN1Ob8yTVRd2HtWORA+Sl/nyWgPgKS+FmQMBcDq4q36p6J5Us/bK5gqrfW6sWgE119Dji9dKE1i+oWeBFG0DT8/vFMJpxbpZ+seMSnyPAB5IVXWNKxqjbb/2tjHIJd/CCABx5Ly7gJcdLI5ufe1H0b1xjFBSe5Yizar6aNS3xnBFj1E7wng27lbvVPZDjHr3/68J7jlXfnVIlFrdCVij++d+CshwivC6wQ0N7tCEvL/UfAOBNchL4ADo9+rkbMfXwNEEbg6BRhOFj9w8Ay/UXUfoH4qx6rxf60M10sVtAqN05def32mQTrFFMDA0DmtsIqUm1Nh4XTlCjc0k5Nr4PzjqJzHpMmwZ1UDLZA9KrefecNyZ3YIfQALdUikLMrJxv74/o3FniLYr52BGLaCoAxmtrhWCIDWzSbTa83tB1K8ZaVUFUIPWP/rnN5KYAWtpIbUJHpqI4c5Jwbm5S+gtqMSoONx+j5UxW7mHdfmgIElnXK8eRjuJJyAjMnIWZ/LiRnIYVhGpRTTmOnerAK6EH3OxqXzI8iyMAhPIN+yvNntCjf0yFXYEEvR5zXLy2tBQQLOPv8hFeyZ/+ednhl7hnyLEtdEc+HzqivXT/KhgWe0gMKEc2mWFriDGI8RNacKIfFjmRO1Ul8oxSgRmcE=
+  - secure: q4qnio57sF5bq7nc0nqBDrMzZlv0lTNCm6MauOFQFMjNLzrRPsTLBc+y9BAPq/OzO3um1rYKnLXqWZqpX9J3+cLvRZIvDgMw1Jg7RjouPMdko/B1FqMVDcY05ciL55+81QZOZeUiQgriFKC2CoLgIfx7I/C1AbMR/nrI9E7WCtgYz0EZHbMSnruBcvXcwjvdoXi8H5EkyVJMOsQte9HORrozbzOxGl9SPCOVYW/kQYhhQhYfPvAGK8PQAamSNikgISWGY3SBpFSc4wpK8t1p0mIefGoDU/RueoNyUc91UaLTBOACLRHsAHaXgj3vTXatBZNBUkrZh4eQeGsxdFcSCPRB4i64bRS00Th6s3vvK88/T7yPapkTVd0pdUTkS2P72gZBK6mszrdKVQ1uIDl54vmMVJCI62TygRF0YY1OpAoILZDaPK9GnyodZLPhlqPx8U982L3QA6uS8K28l5bv4wYjuncgrmkIGtF0SmVbH0y/GAwQ+uX4trSFcESdMgQmIB9bAUZXMzSeLQLMzdjCSeS9oRZWh2GwR0lv9xxF/d4E2N15xnTOtIyfIB9aKQ3OQhSRJmf4JMQq6EN7M5bhWhE/+Ef3oivIir3OWXN5rtURy4wPLCekGTiSOwGrPi9CvEo/U/Pk/YlSSRCWeth52G9tJhmvQ5DO/0+4G7WAMqc=
+  - secure: bimyIthPkTAOvaD/NV4HmBrZAZj/r7mAg9ZAtkRWuIRmfnVmqye1M4HyOUTJHaG/av4qFlEEn5sF2ZC817CD8T+9NgnvBTQuCc7rmHctWSfL9ozZiekPQyGQ+Bn24bz/Sybc73mCpg1JeOF8cz6QgLuxNuGWRPiYFJxlB2+oXYhiFaBAqt6A+dl/Wvt42IUy6Ot0IWBspZJABqhqz0lJamft24H2VcUfv/MRQ4gevulhGzf3FKXnwM8UN3qBACsV/ljmMtZbZlIwMpqygGD1TAy7bQnD0NG1md+yiSJK9B60LxLqVAx+Noe4WYlKBoI6DIfpoM8Qqv4RrzWo5zAAq3ywJbvFutbpJ4d72GlxxcPsBXs1QA5DCOEhDmAlZihIQJnNNDHiOAJ2cmZcHxq4975yFZ6/J+xseEVSR3ghHwiJ2vtS4rFgxZd2GYPFQrNfZ4zAzDS3ay3lY7ailYP1ci2LeundBl9TBjr4eSnOxp13Pu/sJdFqpl/TAGgamtEntxX0TjUbCdnd/Z5ZTmPbvL6vIz+jR34XnkkKdJUzn6MZFk/p0z+L8sdQWS6+M/TNLklMu4tNvrTRFoh5is6O1U7H22pgJ8MZf+/FC5QqcD/sbmWtJHG7F+2y9GAY+PQxhj9VZSvG9zXriZmrywPrz70fmHkS8xvWRJkZqfleQxM=
