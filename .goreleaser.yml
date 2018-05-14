@@ -24,11 +24,11 @@ builds:
         -X github.com/prometheus/common/version.BuildUser={{ .Env.TRAVIS_REPO_SLUG }}
         -X github.com/prometheus/common/version.BuildDate={{ .Date }}
 checksum:
-  name_template: 'checksums-{{ .Env.GO_VERSION }}.txt'
+  name_template: 'checksums.txt'
 snapshot:
-  name_template: "{{ .Tag }}-{{ .Env.GO_VERSION }}-next"
+  name_template: "{{ .Tag }}-next"
 archive:
-  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}_{{ .Env.GO_VERSION }}"
+  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
   format_overrides:
     - goos: windows
       format: zip
@@ -46,8 +46,8 @@ dockers:
     image: quay.io/shift/domain_exporter
     dockerfile: Dockerfile
     tag_templates:
-    - "{{ .Tag }}-{{ .Env.GO_VERSION }}"
-    - "v{{ .Major }}-{{ .Env.GO_VERSION }}"
+    - "{{ .Tag }}"
+    - "v{{ .Major }}"
     - latest
   -
     goos: linux
@@ -57,8 +57,8 @@ dockers:
     image: quay.io/shift/domain_exporter
     dockerfile: Dockerfile
     tag_templates:
-    - "{{ .Tag }}-{{ .Env.GO_VERSION }}-arm"
-    - "v{{ .Major }}-{{ .Env.GO_VERSION }}-arm"
+    - "{{ .Tag }}-arm"
+    - "v{{ .Major }}-arm"
     - latest-arm
   -
     goos: linux
@@ -68,6 +68,6 @@ dockers:
     image: quay.io/shift/domain_exporter
     dockerfile: Dockerfile
     tag_templates:
-    - "{{ .Tag }}-{{ .Env.GO_VERSION }}-arm64"
-    - "v{{ .Major }}-{{ .Env.GO_VERSION }}-arm64"
+    - "{{ .Tag }}-arm64"
+    - "v{{ .Major }}-arm64"
     - latest-arm64

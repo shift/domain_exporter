@@ -9,6 +9,13 @@ matrix:
   allow_failures:
   - go: 1.7.x
   - go: tip
+install:
+  - go get -u github.com/golang/dep/...
+  - dep ensure
+script:
+  - go get -u gopkg.in/alecthomas/gometalinter.v2
+  - gometalinter.v2 --install
+  - gometalinter.v2 --enable-all --line-length=120 --disable=gas
 services:
 - docker
 deploy:
