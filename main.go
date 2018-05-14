@@ -163,7 +163,7 @@ func lookup(domain string, handler *prometheus.GaugeVec, logger log.Logger) erro
 
 	for _, format := range formats {
 		if date, err := time.Parse(format, strings.TrimSpace(result[2])); err == nil {
-			days := math.Floor(time.Until(time.Now()).Hours() / 24)
+			days := math.Floor(time.Until(date).Hours() / 24)
 			_ = level.Info(logger).Log("domain:", domain, "days", days, "date", date)
 			handler.WithLabelValues(domain).Set(days)
 			return nil

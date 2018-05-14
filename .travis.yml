@@ -19,15 +19,16 @@ script:
   - gometalinter.v2 --enable-all --line-length=120 --disable=gas
 services:
 - docker
-deploy:
-- provider: script
-  skip_cleanup: true
-  script: bash deploy.sh
-  on:
-    tags: true
-    condition: "$TRAVIS_OS_NAME = linux"
-    repo: shift/domain_exporter
-  go: 1.10.x
+jobs:
+  include:
+    - stage: deploy
+      skip_cleanup: true
+      script: bash deploy.sh
+      on:
+        tags: true
+        condition: "$TRAVIS_OS_NAME = linux"
+        repo: shift/domain_exporter
+      go: 1.10.x
 env:
   global:
   - secure: DMvr+zAxJnYM4XOV8pL5AIcNquN1Ob8yTVRd2HtWORA+Sl/nyWgPgKS+FmQMBcDq4q36p6J5Us/bK5gqrfW6sWgE119Dji9dKE1i+oWeBFG0DT8/vFMJpxbpZ+seMSnyPAB5IVXWNKxqjbb/2tjHIJd/CCABx5Ly7gJcdLI5ufe1H0b1xjFBSe5Yizar6aNS3xnBFj1E7wng27lbvVPZDjHr3/68J7jlXfnVIlFrdCVij++d+CshwivC6wQ0N7tCEvL/UfAOBNchL4ADo9+rkbMfXwNEEbg6BRhOFj9w8Ay/UXUfoH4qx6rxf60M10sVtAqN05def32mQTrFFMDA0DmtsIqUm1Nh4XTlCjc0k5Nr4PzjqJzHpMmwZ1UDLZA9KrefecNyZ3YIfQALdUikLMrJxv74/o3FniLYr52BGLaCoAxmtrhWCIDWzSbTa83tB1K8ZaVUFUIPWP/rnN5KYAWtpIbUJHpqI4c5Jwbm5S+gtqMSoONx+j5UxW7mHdfmgIElnXK8eRjuJJyAjMnIWZ/LiRnIYVhGpRTTmOnerAK6EH3OxqXzI8iyMAhPIN+yvNntCjf0yFXYEEvR5zXLy2tBQQLOPv8hFeyZ/+ednhl7hnyLEtdEc+HzqivXT/KhgWe0gMKEc2mWFriDGI8RNacKIfFjmRO1Ul8oxSgRmcE=
