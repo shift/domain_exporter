@@ -22,4 +22,4 @@ Flags:
 
 ### Docker image
 
-We publish a docker image [on the docker hub](https://hub.docker.com/r/shift/domain_exporter/). You can pull this with `docker pull shift/domain_exporter`.
+We publish a docker image [on the Quay registry](https://quay.io/repository/shift/domain_exporter). You can pull this with `docker pull quay.io/shift/domain_exporter`.
