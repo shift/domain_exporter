@@ -8,6 +8,7 @@ go:
 matrix:
   allow_failures:
   - go: 1.7.x
+  - go: 1.8.x
   - go: tip
 install:
   - go get -u github.com/golang/dep/...
