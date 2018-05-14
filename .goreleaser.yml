@@ -18,6 +18,11 @@ builds:
       - 6
       - 7
       - ''
+    ldflags: -s -w -X github.com/prometheus/common/version.Version={{ .Version }}
+        -X github.com/prometheus/common/version.Revision={{ .Commit }}
+        -X github.com/prometheus/common/version.Branch={{ .Env.TRAVIS_BRANCH }}
+        -X github.com/prometheus/common/version.BuildUser={{ .Env.TRAVIS_REPO_SLUG }}
+        -X github.com/prometheus/common/version.BuildDate={{ .Date }}
 checksum:
   name_template: 'checksums-{{ .Env.GO_VERSION }}.txt'
 snapshot:
