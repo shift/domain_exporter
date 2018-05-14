@@ -10,12 +10,14 @@ domains:
 
 Flags:
 ````bash
-Usage of ./domain_exporter:
-  -bind string
-        Port to expose the /metrics endpoint on (default ":9203")
-  -config string
-        Path to configuration file (default "./config")
+usage: domain_exporter [<flags>]
 
+Flags:
+  -h, --help                  Show context-sensitive help (also try --help-long and --help-man).
+      --config="domains.yml"  Domain exporter configuration file.
+      --bind=":9203"          The address to listen on for HTTP requests.
+      --log.level=info        Only log messages with the given severity or above. One of: [debug, info, warn, error]
+      --version               Show application version. 
 ````
 
 ### Docker image
