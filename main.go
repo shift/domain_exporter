@@ -38,7 +38,7 @@ var (
 		[]string{"domain"},
 	)
 
-	expiryRegex = regexp.MustCompile(`(?i)(Registry Expiry Date|paid-till|Expiration Date|Expiry.*|expires.*): (.*)`)
+	expiryRegex = regexp.MustCompile(`(?i)(Registry Expiry Date|paid-till|Expiration Date|Expiration Time|Expiry.*|expires.*): (.*)`)
 
 	formats = []string{
 		"2006-01-02",
@@ -51,6 +51,7 @@ var (
 		"2006/01/02",
 		"Mon Jan 2006 15:04:05",
 		"2006-01-02 15:04:05-07",
+		"2006-01-02 15:04:05",
 	}
 )
 
