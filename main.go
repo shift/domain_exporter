@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/domainr/whois"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
 	"github.com/prometheus/client_golang/prometheus"
@@ -10,7 +11,6 @@ import (
 	"github.com/prometheus/common/promlog"
 	"github.com/prometheus/common/promlog/flag"
 	"github.com/prometheus/common/version"
-	"github.com/domainr/whois"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -55,7 +55,7 @@ var (
 	}
 
 	allowedLevel promlog.AllowedLevel
-	logger log.Logger
+	logger       log.Logger
 )
 
 type Config struct {
