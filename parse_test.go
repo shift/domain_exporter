@@ -19,6 +19,8 @@ func TestParsing(t *testing.T) {
 		filename, line string
 	}{
 		{filename: "google.cn", line: "Expiration Time: 2019-03-17 12:48:36"},
+		{filename: "google.com", line: "Registry Expiry Date: 2020-09-14T04:00:00Z"},
+		{filename: "ietf.org", line: "Registry Expiry Date: 2020-03-12T05:00:00Z"},
 	}
 
 	for i := range cases {
