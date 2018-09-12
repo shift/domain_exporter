@@ -40,3 +40,9 @@ groups:
       annotations:
         description: "{{ $labels.domain }} expires in {{ $value }} days"
 ```
+
+### FAQ
+
+##### Why did I get a negative amount of days until expiry?
+
+The WHOIS resposne probably doesn't parse correctly. Please create an issue with the response and we'll add the format.
