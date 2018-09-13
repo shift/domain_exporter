@@ -2,8 +2,10 @@ package main
 
 import (
 	"io/ioutil"
+	"math"
 	"path"
 	"testing"
+	"time"
 
 	"github.com/prometheus/common/promlog"
 )
@@ -16,11 +18,15 @@ func init() { // so we don't panic
 
 func TestParsing(t *testing.T) {
 	cases := []struct {
-		filename, line string
+		filename string
+		date     time.Time
 	}{
-		{filename: "google.cn", line: "Expiration Time: 2019-03-17 12:48:36"},
-		{filename: "google.com", line: "Registry Expiry Date: 2020-09-14T04:00:00Z"},
-		{filename: "ietf.org", line: "Registry Expiry Date: 2020-03-12T05:00:00Z"},
+		{filename: "google.cn", date: time.Date(2019, 3, 17, 12, 48, 36, 0, time.UTC)},
+		{filename: "google.com", date: time.Date(2020, 9, 14, 4, 0, 0, 0, time.UTC)},
+		{filename: "ietf.org", date: time.Date(2020, 3, 12, 5, 0, 0, 0, time.UTC)},
+		// This is a .com WHOIS response that has a different format.
+		{filename: "com", date: time.Date(2018, 7, 3, 19, 6, 9, 0, time.UTC)},
+		{filename: "io", date: time.Date(2018, 12, 21, 17, 35, 22, 0, time.UTC)},
 	}
 
 	for i := range cases {
@@ -30,11 +36,15 @@ func TestParsing(t *testing.T) {
 			t.Errorf("problem on %s: %v", cases[i].filename, err)
 		}
 
-		n1, e1 := parse(cases[i].filename, ans)
-		n2, e2 := parse(cases[i].filename, ans)
+		parsedDays, err := parse(cases[i].filename, ans)
+		if parsedDays == 0 || err != nil {
+			t.Errorf("%s got %.2f (error=%v) ", cases[i].filename, parsedDays, err)
+		}
 
-		if (n1 <= 0 || n2 <= 0) || n1 != n2 {
-			t.Errorf("%s got %.2f (error=%v) and %.2f (error=%v)", cases[i].filename, n1, e1, n2, e2)
+		answerDays := cases[i].date.Sub(time.Now()).Hours() / 24
+		d := math.Abs(parsedDays-answerDays)
+		if d < 0 || d > 1 {
+			t.Errorf("cases[%d]: parsedDays=%.0f answerDays=%.0f", i, parsedDays, answerDays)
 		}
 	}
 }
