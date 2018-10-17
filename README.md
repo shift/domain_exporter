@@ -26,7 +26,8 @@ We publish a docker image [on the Quay registry](https://quay.io/repository/shif
 
 ### Example Prometheus Alert
 
-The following alert will be triggered when domains expire within 45 days
+The following alert will be triggered when domains expire within 45 days, or if
+they don't have a whois record available (perhaps having been long expired).
 
 ```yaml
 groups:
@@ -39,6 +40,13 @@ groups:
         severity: warning
       annotations:
         description: "{{ $labels.domain }} expires in {{ $value }} days"
+    - alert: DomainUnfindable
+      expr: domain_expiration_unfindable > 0
+      for: 24h
+      labels:
+        severity: critical
+      annotations:
+        description: "Unable to find or parse expiry for {{ $labels.domain }}"
 ```
 
 ### FAQ
