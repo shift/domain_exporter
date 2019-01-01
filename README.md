@@ -17,6 +17,7 @@ Flags:
       --config="domains.yml"  Domain exporter configuration file.
       --bind=":9203"          The address to listen on for HTTP requests.
       --log.level=info        Only log messages with the given severity or above. One of: [debug, info, warn, error]
+      --log.format=logfmt     Output format of log messages. One of: [logfmt, json]
       --version               Show application version.
 ```
 
