@@ -61,8 +61,8 @@ var (
 		"2006-01-02 15:04:05",
 	}
 
-	allowedLevel promlog.AllowedLevel
-	logger       log.Logger
+	config promlog.Config
+	logger log.Logger
 )
 
 type Config struct {
@@ -70,12 +70,12 @@ type Config struct {
 }
 
 func main() {
-	flag.AddFlags(kingpin.CommandLine, &allowedLevel)
+	flag.AddFlags(kingpin.CommandLine, &config)
 	kingpin.Version(version.Print("domain_exporter"))
 	kingpin.HelpFlag.Short('h')
 	kingpin.Parse()
 
-	logger = promlog.New(allowedLevel)
+	logger = promlog.New(&config)
 
 	level.Info(logger).Log("msg", "Starting domain_exporter", "version", version.Info())
 	level.Info(logger).Log("msg", "Build context", version.BuildContext())

@@ -11,9 +11,15 @@ import (
 )
 
 func init() { // so we don't panic
-	level := promlog.AllowedLevel{}
-	level.Set("info")
-	logger = promlog.New(level)
+	allowedLevel := promlog.AllowedLevel{}
+	allowedLevel.Set("debug")
+	allowedFormat := promlog.AllowedFormat{}
+	allowedFormat.Set("logfmt")
+	promlogConfig := promlog.Config{
+		Level:  &allowedLevel,
+		Format: &allowedFormat,
+	}
+	logger = promlog.New(&promlogConfig)
 }
 
 func TestParsing(t *testing.T) {
