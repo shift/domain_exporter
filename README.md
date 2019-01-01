@@ -25,6 +25,10 @@ Flags:
 
 We publish a docker image [on the Quay registry](https://quay.io/repository/shift/domain_exporter). You can pull this with `docker pull quay.io/shift/domain_exporter`.
 
+### Running on Kubernetes
+
+[Here](contrib/k8s-domain-exporter.yaml) is an example Kubernetes deployment configuration for how to deploy the domain_exporter.
+
 ### Example Prometheus Alert
 
 The following alert will be triggered when domains expire within 45 days, or if
