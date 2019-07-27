@@ -3,6 +3,15 @@ package main
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"math"
+	"net/http"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+	"time"
+
 	"github.com/domainr/whois"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
@@ -13,14 +22,6 @@ import (
 	"github.com/prometheus/common/version"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
-	"math"
-	"net/http"
-	"os"
-	"path/filepath"
-	"regexp"
-	"strings"
-	"time"
 )
 
 var (
