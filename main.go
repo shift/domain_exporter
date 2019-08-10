@@ -14,7 +14,6 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -32,15 +31,15 @@ var (
 
 	domainExpiration = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name: "domain_expiration",
-			Help: "Days until the WHOIS record states this domain will expire",
+			Name: "domain_expiration_seconds",
+			Help: "UNIX timestamp when the WHOIS record states this domain will expire",
 		},
 		[]string{"domain"},
 	)
-	unfindableExpiration = prometheus.NewGaugeVec(
+	parsedExpiration = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name: "domain_expiration_unfindable",
-			Help: "That the domain date could not be parsed, or the domain doesn't have a whois record",
+			Name: "domain_expiration_parsed",
+			Help: "That the domain date was parsed",
 		},
 		[]string{"domain"},
 	)
@@ -82,7 +81,7 @@ func main() {
 	level.Info(logger).Log("msg", "Build context", version.BuildContext())
 
 	prometheus.Register(domainExpiration)
-	prometheus.Register(unfindableExpiration)
+	prometheus.Register(parsedExpiration)
 
 	config := Config{}
 
@@ -104,7 +103,7 @@ func main() {
 		go func() {
 			for {
 				for _, query := range config.Domains {
-					_, err = lookup(query, domainExpiration, unfindableExpiration)
+					_, err = lookup(query, domainExpiration, parsedExpiration)
 					if err != nil {
 						level.Warn(logger).Log("warn", err)
 					}
@@ -151,7 +150,7 @@ func probeHandler(w http.ResponseWriter, r *http.Request, logger log.Logger) {
 		http.Error(w, "Target parameter is missing", http.StatusBadRequest)
 		return
 	}
-	_, err := lookup(target, probeExpiration, unfindableExpiration)
+	_, err := lookup(target, probeExpiration, parsedExpiration)
 	if err != nil {
 		level.Warn(logger).Log("warn", err)
 		http.Error(w, fmt.Sprintf("Don't know how to parse: %q", target), http.StatusBadRequest)
@@ -172,16 +171,15 @@ func parse(host string, res []byte) (float64, error) {
 
 	for _, format := range formats {
 		if date, err := time.Parse(format, strings.TrimSpace(results[2])); err == nil {
-			days := math.Floor(date.Sub(time.Now()).Hours() / 24)
-			level.Info(logger).Log("domain:", host, "days", days, "date", date)
-			return days, nil
+			level.Info(logger).Log("domain:", host, "date", date)
+			return float64(date.Unix()), nil
 		}
 
 	}
 	return -1, errors.New(fmt.Sprintf("Unable to parse date: %s, for %s\n", strings.TrimSpace(results[2]), host))
 }
 
-func lookup(domain string, handler *prometheus.GaugeVec, badhandler *prometheus.GaugeVec) (float64, error) {
+func lookup(domain string, handler *prometheus.GaugeVec, parsedExpiration *prometheus.GaugeVec) (float64, error) {
 	req, err := whois.NewRequest(domain)
 	if err != nil {
 		return -1, err
@@ -192,20 +190,20 @@ func lookup(domain string, handler *prometheus.GaugeVec, badhandler *prometheus.
 		return -1, err
 	}
 
-	days, err := parse(domain, res.Body)
+	date, err := parse(domain, res.Body)
 	if err != nil {
-		if badhandler != nil {
-			badhandler.WithLabelValues(domain).Set(1)
+		if parsedExpiration != nil {
+			parsedExpiration.WithLabelValues(domain).Set(0)
 		}
 		return -1, err
 	}
 
 	if handler != nil {
-		handler.WithLabelValues(domain).Set(days)
+		handler.WithLabelValues(domain).Set(date)
 	}
-	if badhandler != nil {
-		badhandler.WithLabelValues(domain).Set(0)
+	if parsedExpiration != nil {
+		parsedExpiration.WithLabelValues(domain).Set(1)
 	}
 
-	return days, nil
+	return date, nil
 }
