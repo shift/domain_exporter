@@ -52,6 +52,13 @@ groups:
         severity: critical
       annotations:
         description: "Unable to find or parse expiry for {{ $labels.domain }}"
+    - alert: DomainMetricsAbsent
+      expr: absent(domain_expiration) > 0
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        description: "Metrics for domain-exporter are absent"
 ```
 
 ### FAQ
