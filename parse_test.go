@@ -2,7 +2,6 @@ package main
 
 import (
 	"io/ioutil"
-	"math"
 	"path"
 	"testing"
 	"time"
@@ -43,15 +42,14 @@ func TestParsing(t *testing.T) {
 			t.Errorf("problem on %s: %v", cases[i].filename, err)
 		}
 
-		parsedDays, err := parse(cases[i].filename, ans)
-		if parsedDays == 0 || err != nil {
-			t.Errorf("%s got %.2f (error=%v) ", cases[i].filename, parsedDays, err)
+		parsedDate, err := parse(cases[i].filename, ans)
+		if parsedDate == 0 || err != nil {
+			t.Errorf("%s got %.2f (error=%v) ", cases[i].filename, parsedDate, err)
 		}
 
-		answerDays := cases[i].date.Sub(time.Now()).Hours() / 24
-		d := math.Abs(parsedDays - answerDays)
-		if d < 0 || d > 1 {
-			t.Errorf("cases[%d]: parsedDays=%.0f answerDays=%.0f", i, parsedDays, answerDays)
+		answerDate := float64(cases[i].date.Unix())
+		if answerDate != parsedDate {
+			t.Errorf("cases[%d]: parsedDate=%.0f answerDate=%.0f", i, parsedDate, answerDate)
 		}
 	}
 }
