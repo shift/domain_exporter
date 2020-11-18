@@ -1,4 +1,6 @@
 # domain_exporter
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshift%2Fdomain_exporter.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshift%2Fdomain_exporter?ref=badge_shield)
+
 
 Very simple service which performs WHOIS lookups for a list of domains provided in the "config" file and exposes them on a "/metrics" endpoint for consumption via Prometheus.
 
@@ -66,3 +68,7 @@ groups:
 ##### Why did I get a negative amount of days until expiry?
 
 The WHOIS resposne probably doesn't parse correctly. Please create an issue with the response and we'll add the format.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshift%2Fdomain_exporter.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshift%2Fdomain_exporter?ref=badge_large)
