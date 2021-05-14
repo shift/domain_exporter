@@ -45,7 +45,7 @@ var (
 		[]string{"domain"},
 	)
 
-	expiryRegex = regexp.MustCompile(`(?i)(\[有効期限]|Registry Expiry Date|paid-till|Expiration Date|Expiration Time|Expiry.*|expires.*|expire-date)[?:|\s][ \t](.*)`)
+	expiryRegex = regexp.MustCompile(`(?i)(\[有効期限]|Registry Expiry Date|paid-till|Expiration Date|Expiration Time|Expiry.*|expires.*|expire-date|Expire)[?:|\s][ \t](.*)`)
 
 	formats = []string{
 		"2006-01-02",
@@ -60,6 +60,7 @@ var (
 		"2006-01-02 15:04:05-07",
 		"2006-01-02 15:04:05",
 		"2.1.2006 15:04:05",
+		"02.01.2006",
 	}
 
 	config promlog.Config
