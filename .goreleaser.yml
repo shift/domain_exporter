@@ -17,9 +17,9 @@ builds:
       - 5
       - 6
       - 7
-      - ''
+      - ""
 checksum:
-  name_template: 'checksums-{{ .Env.GO_VERSION }}.txt'
+  name_template: "checksums-{{ .Env.GO_VERSION }}.txt"
 snapshot:
   name_template: "{{ .Tag }}-{{ .Env.GO_VERSION }}-next"
 archive:
@@ -31,38 +31,35 @@ changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+      - "^docs:"
+      - "^test:"
 dockers:
-  -
-    goos: linux
+  - goos: linux
     goarch: amd64
     binary: domain_exporter
-    image: quay.io/shift/domain_exporter
+    image: zifter/domain_exporter
     dockerfile: Dockerfile
     tag_templates:
-    - "{{ .Tag }}-{{ .Env.GO_VERSION }}"
-    - "v{{ .Major }}-{{ .Env.GO_VERSION }}"
-    - latest
-  -
-    goos: linux
+      - "{{ .Tag }}-{{ .Env.GO_VERSION }}"
+      - "v{{ .Major }}-{{ .Env.GO_VERSION }}"
+      - latest
+  - goos: linux
     goarch: arm
-    goarm: ''
+    goarm: ""
     binary: domain_exporter
-    image: quay.io/shift/domain_exporter
+    image: zifter/domain_exporter
     dockerfile: Dockerfile
     tag_templates:
-    - "{{ .Tag }}-{{ .Env.GO_VERSION }}-arm"
-    - "v{{ .Major }}-{{ .Env.GO_VERSION }}-arm"
-    - latest-arm
-  -
-    goos: linux
+      - "{{ .Tag }}-{{ .Env.GO_VERSION }}-arm"
+      - "v{{ .Major }}-{{ .Env.GO_VERSION }}-arm"
+      - latest-arm
+  - goos: linux
     goarch: arm64
-    goarm: ''
+    goarm: ""
     binary: domain_exporter
-    image: quay.io/shift/domain_exporter
+    image: zifter/domain_exporter
     dockerfile: Dockerfile
     tag_templates:
-    - "{{ .Tag }}-{{ .Env.GO_VERSION }}-arm64"
-    - "v{{ .Major }}-{{ .Env.GO_VERSION }}-arm64"
-    - latest-arm64
+      - "{{ .Tag }}-{{ .Env.GO_VERSION }}-arm64"
+      - "v{{ .Major }}-{{ .Env.GO_VERSION }}-arm64"
+      - latest-arm64
