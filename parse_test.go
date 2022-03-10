@@ -31,6 +31,7 @@ func TestParsing(t *testing.T) {
 		{filename: "google.com", date: time.Date(2020, 9, 14, 4, 0, 0, 0, time.UTC)},
 		{filename: "ietf.org", date: time.Date(2020, 3, 12, 5, 0, 0, 0, time.UTC)},
 		{filename: "unisportstore.fi", date: time.Date(2019, 3, 20, 17, 13, 49, 0, time.UTC)},
+		{filename: "yolo.im", date: time.Date(2022, 06, 05, 00, 59, 59, 0, time.UTC)},
 		// This is a .com WHOIS response that has a different format.
 		{filename: "com", date: time.Date(2018, 7, 3, 19, 6, 9, 0, time.UTC)},
 		{filename: "io", date: time.Date(2018, 12, 21, 17, 35, 22, 0, time.UTC)},
