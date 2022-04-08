@@ -13,4 +13,4 @@ jobs:
           commit_message: "chore(chart): automatic update docs"
           username: "shift"
           email: "shift@someone.section.me"
-          git_push: true 
+          git_push: "true"
