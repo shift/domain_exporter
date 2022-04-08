@@ -1,0 +1,16 @@
+me: Generate Helm Chart Documentation 
+on:
+  push:
+jobs:
+  generate-helm-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Aimee-888/HelmDocs-GithubAction@v1
+        with: 
+          src_path: chart
+          template_file: README.md.gotmpl
+          commit_message: chore(chart) automatic update
+          username: shift
+          email: shift@someone.section.me
+          git_push: true 
