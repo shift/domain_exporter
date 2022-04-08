@@ -1,0 +1,19 @@
+name: Generate Mixin Artifacts
+on:
+  pull_request:
+  push:
+    
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: kobtea/setup-jsonnet-action@v1
+      - run: |
+          cd mixin
+          jb install
+          jsonnet -S alerts.jsonnet
+          rm -rf ../chart/templates/dashboards
+          mkdir -p ../chart/templates/dashboards
+          jsonnet -J vendor -m ../chart/templates/dashboards dashboards.jsonnet
+      - uses: EndBug/add-and-commit@v9.0.0
