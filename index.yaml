@@ -3,6 +3,16 @@ entries:
   domain-exporter:
   - apiVersion: v2
     appVersion: v0.1.12
+    created: "2022-04-08T22:20:12.003301273Z"
+    description: domain_exporter chart
+    digest: eba45bc583b1d99c1867cb8d23e53e063a229a0911944bc92774e6bb03975006
+    name: domain-exporter
+    type: application
+    urls:
+    - https://github.com/shift/domain_exporter/releases/download/domain-exporter-0.0.3/domain-exporter-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: v0.1.12
     created: "2022-04-08T21:28:32.859258622Z"
     description: domain_exporter chart
     digest: b2af9e59304d52e318a17302bfd513139bdbfe923a839b209a0c4abb0eef0eab
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/shift/domain_exporter/releases/download/domain-exporter-0.0.2/domain-exporter-0.0.2.tgz
     version: 0.0.2
-generated: "2022-04-08T21:28:32.859264323Z"
+generated: "2022-04-08T22:20:12.003350973Z"
