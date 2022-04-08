@@ -1,4 +1,4 @@
-me: Generate Helm Chart Documentation 
+name: Generate Helm Chart Documentation 
 on:
   push:
 jobs:
