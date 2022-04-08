@@ -5,9 +5,9 @@
 # -- Number of replicas to run when auto-scaling (ha) is turned off.
 replicaCount: 1
 
+# -- List of domains to statically scrape.
+# Used to populate ConfigMap used in the pod.
 domains:
-  # -- List of domains to statically scrape.
-  # Used to populate ConfigMap used in the pod.
   - google.com
   - goolge.co.uk
   - google.de
