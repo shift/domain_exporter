@@ -9,7 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: kobtea/setup-jsonnet-action@v1
-      - uses: EndBug/add-and-commit@v9.0.0
       - run: |
           cd mixin
           jb install
@@ -17,3 +16,4 @@ jobs:
           rm -rf ../chart/templates/dashboards
           mkdir -p ../chart/templates/dashboards
           jsonnet -J vendor -m ../chart/templates/dashboards dashboards.jsonnet
+      - uses: EndBug/add-and-commit@v9.0.0
