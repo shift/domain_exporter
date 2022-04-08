@@ -10,7 +10,7 @@ jobs:
         with: 
           src_path: chart
           template_file: README.md.gotmpl
-          commit_message: chore(chart) automatic update
-          username: shift
-          email: shift@someone.section.me
+          commit_message: "chore(chart): automatic update docs"
+          username: "shift"
+          email: "shift@someone.section.me"
           git_push: true 
