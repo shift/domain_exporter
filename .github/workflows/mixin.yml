@@ -10,6 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: kobtea/setup-jsonnet-action@v1
       - run: |
+          cd mixin
           jb install
           jsonnet -S alerts.jsonnet
           rm -rf ../chart/templates/dashboards
