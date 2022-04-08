@@ -1,6 +1,0 @@
-apiVersion: v2
-name: domain-exporter
-description: domain_exporter chart
-type: application
-version: 0.0.1
-appVersion: "v0.1.11"
