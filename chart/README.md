@@ -11,9 +11,7 @@ domain_exporter chart
 | affinity | object | `{}` |  |
 | autoscaling | object | `{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80}` | Leaving this in for the laughs |
 | deployment.apiVersion | string | `""` | For those running 1.16 and less to define the apiVersion to be extensions/v1beta1, apps/v1beta1, or apps/v1beta2. Default: apps/v1 |
-| domains[0] | string | `"google.com"` | List of domains to statically scrape. Used to populate ConfigMap used in the pod. |
-| domains[1] | string | `"goolge.co.uk"` |  |
-| domains[2] | string | `"google.de"` |  |
+| domains | list | `["google.com","goolge.co.uk","google.de"]` | List of domains to statically scrape. Used to populate ConfigMap used in the pod. |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ghcr.io/shift/domain_exporter"` |  |
