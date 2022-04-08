@@ -27,7 +27,7 @@ var (
 	// How often to check domains
 	checkRate = 12 * time.Hour
 
-	configFile = kingpin.Flag("config", "Domain exporter configuration file.").Default("domains.yml").String()
+	configFile = kingpin.Flag("config", "Domain exporter configuration file.").Default("domains.yml").Envar("CONFIG").String()
 	httpBind   = kingpin.Flag("bind", "The address to listen on for HTTP requests.").Default(":9203").String()
 
 	domainExpiration = prometheus.NewGaugeVec(
