@@ -14,4 +14,5 @@ jobs:
           jb install
           jsonnet -S alerts.jsonnet
           rm -rf ../chart/templates/dashboards
+          mkdir -p ../chart/templates/dashboards
           jsonnet -J vendor -m ../chart/templates/dashboards dashboards.jsonnet
