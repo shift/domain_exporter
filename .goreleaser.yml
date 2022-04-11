@@ -49,11 +49,15 @@ dockers:
       - ghcr.io/shift/domain_exporter:v{{ .Version }}-amd64
     build_flag_templates:
       - "--pull"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-      - "--label=org.opencontainers.image.source=https://github.com/ekristen/azure-nuke"
+      - --label=org.opencontainers.image.created={{.Date}}
+      - --label=org.opencontainers.image.revision={{.FullCommit}}
+      - --label=org.opencontainers.image.version={{.Version}}
+      - --label=org.opencontainers.image.title={{.ProjectName}}
+      - --label=org.opencontainers.image.description=Prometheus exporter which exposes domain expiration monitoring via parsing whois server responses.
+      - --label=org.opencontainers.image.url={{.GitURL}}
+      - --label=org.opencontainers.image.documentation={{.GitURL}}
+      - --label=org.opencontainers.image.source={{replace .GitURL ".git" "" }}
+      - --label=io.artifacthub.package.readme-url={{replace .GitURL ".git" ""}}/blob/master/README.md
       - "--platform=linux/amd64"
   - use: buildx
     goos: linux
@@ -63,11 +67,15 @@ dockers:
       - ghcr.io/shift/domain_exporter:v{{ .Version }}-arm64
     build_flag_templates:
       - "--pull"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-      - "--label=org.opencontainers.image.source=https://github.com/shift/domain_exporter"
+      - --label=org.opencontainers.image.created={{.Date}}
+      - --label=org.opencontainers.image.revision={{.FullCommit}}
+      - --label=org.opencontainers.image.version={{.Version}}
+      - --label=org.opencontainers.image.title={{.ProjectName}}
+      - --label=org.opencontainers.image.description=Prometheus exporter which exposes domain expiration monitoring via parsing whois server responses.
+      - --label=org.opencontainers.image.url={{.GitURL}}
+      - --label=org.opencontainers.image.documentation={{.GitURL}}
+      - --label=org.opencontainers.image.source={{replace .GitURL ".git" "" }}
+      - --label=io.artifacthub.package.readme-url={{replace .GitURL ".git" ""}}/blob/master/README.md
       - "--platform=linux/arm64"
   - use: buildx
     goos: linux
@@ -78,11 +86,15 @@ dockers:
       - ghcr.io/shift/domain_exporter:v{{ .Version }}-arm32v7
     build_flag_templates:
       - "--pull"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-      - "--label=org.opencontainers.image.source=https://github.com/shift/domain_exporter"
+      - --label=org.opencontainers.image.created={{.Date}}
+      - --label=org.opencontainers.image.revision={{.FullCommit}}
+      - --label=org.opencontainers.image.version={{.Version}}
+      - --label=org.opencontainers.image.title={{.ProjectName}}
+      - --label=org.opencontainers.image.description=Prometheus exporter which exposes domain expiration monitoring via parsing whois server responses.
+      - --label=org.opencontainers.image.url={{.GitURL}}
+      - --label=org.opencontainers.image.documentation={{.GitURL}}
+      - --label=org.opencontainers.image.source={{replace .GitURL ".git" "" }}
+      - --label=io.artifacthub.package.readme-url={{replace .GitURL ".git" ""}}/blob/master/README.md
       - "--platform=linux/arm/v7"
 docker_manifests:
   - use: docker

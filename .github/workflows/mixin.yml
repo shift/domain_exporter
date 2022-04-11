@@ -13,7 +13,6 @@ jobs:
           cd mixin
           jb install
           jsonnet -S alerts.jsonnet
-          git rm -rf ../chart/templates/dashboards
           rm -rf ../chart/dashboards
           mkdir -p ../chart/dashboards
           jsonnet -J vendor -m ../chart/dashboards dashboards.jsonnet
