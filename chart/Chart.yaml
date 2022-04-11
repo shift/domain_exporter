@@ -1,6 +1,6 @@
 apiVersion: v2
 name: domain-exporter
-description: domain_exporter chart
+description: Chart for the deployment and configuration of the Prometheus domain exporter.
 type: application
-version: 0.0.4
+version: 0.0.5
 appVersion: "v0.1.12"
