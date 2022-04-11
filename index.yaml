@@ -3,6 +3,17 @@ entries:
   domain-exporter:
   - apiVersion: v2
     appVersion: v0.1.12
+    created: "2022-04-11T15:15:06.881067229Z"
+    description: Chart for the deployment and configuration of the Prometheus domain
+      exporter.
+    digest: 66e4e7dde6ed208059b8e0cf72b4c16e837742d404730dfa06cc4cbbb96b0914
+    name: domain-exporter
+    type: application
+    urls:
+    - https://github.com/shift/domain_exporter/releases/download/domain-exporter-0.0.5/domain-exporter-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
+    appVersion: v0.1.12
     created: "2022-04-11T14:58:00.389237963Z"
     description: domain_exporter chart
     digest: ae9c339bc27c12559edbda68d360c287940046ebfe833e396ed02f54b28a5ab7
@@ -31,4 +42,4 @@ entries:
     urls:
     - https://github.com/shift/domain_exporter/releases/download/domain-exporter-0.0.2/domain-exporter-0.0.2.tgz
     version: 0.0.2
-generated: "2022-04-11T14:58:00.389248063Z"
+generated: "2022-04-11T15:15:06.881093229Z"
