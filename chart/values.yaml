@@ -10,7 +10,6 @@ replicaCount: 1
 domains:
   - google.com
   - goolge.co.uk
-  - google.de
 
 podMonitor:
   # -- If disabled prometheus.io/scrape will be set to true.
