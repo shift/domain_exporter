@@ -57,7 +57,7 @@ dockers:
       - --label=org.opencontainers.image.url={{.GitURL}}
       - --label=org.opencontainers.image.documentation={{.GitURL}}
       - --label=org.opencontainers.image.source={{replace .GitURL ".git" "" }}
-      - --label=io.artifacthub.package.readme-url={{replace .GitURL ".git" ""}}/blob/master/README.md
+      - --label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/shift/domain_exporter/master/README.md
       - "--platform=linux/amd64"
   - use: buildx
     goos: linux
@@ -75,7 +75,7 @@ dockers:
       - --label=org.opencontainers.image.url={{.GitURL}}
       - --label=org.opencontainers.image.documentation={{.GitURL}}
       - --label=org.opencontainers.image.source={{replace .GitURL ".git" "" }}
-      - --label=io.artifacthub.package.readme-url={{replace .GitURL ".git" ""}}/blob/master/README.md
+      - --label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/shift/domain_exporter/master/README.md
       - "--platform=linux/arm64"
   - use: buildx
     goos: linux
@@ -94,7 +94,7 @@ dockers:
       - --label=org.opencontainers.image.url={{.GitURL}}
       - --label=org.opencontainers.image.documentation={{.GitURL}}
       - --label=org.opencontainers.image.source={{replace .GitURL ".git" "" }}
-      - --label=io.artifacthub.package.readme-url={{replace .GitURL ".git" ""}}/blob/master/README.md
+      - --label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/shift/domain_exporter/master/README.md
       - "--platform=linux/arm/v7"
 docker_manifests:
   - use: docker
