@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.17](https://github.com/shift/domain_exporter/compare/v0.1.16...v0.1.17) (2022-07-21)
+
+
+### Bug Fixes
+
+* **deps:** go mod tidy ([8a01be0](https://github.com/shift/domain_exporter/commit/8a01be08782722c2448abe53469e16afc0dbcef8))
+
 ## [0.1.16](https://github.com/shift/domain_exporter/compare/v0.1.15...v0.1.16) (2022-07-12)
 
 
