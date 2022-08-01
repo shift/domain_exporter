@@ -6,7 +6,7 @@ require (
 	github.com/domainr/whois v0.1.0
 	github.com/go-kit/kit v0.12.0
 	github.com/prometheus/client_golang v1.12.2
-	github.com/prometheus/common v0.36.0
+	github.com/prometheus/common v0.37.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v2 v2.4.0
 )
