@@ -1,6 +1,6 @@
 module github.com/shift/domain_exporter
 
-go 1.18
+go 1.19
 
 require (
 	github.com/domainr/whois v0.1.0
