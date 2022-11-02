@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.20](https://github.com/shift/domain_exporter/compare/v0.1.19...v0.1.20) (2022-11-02)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/prometheus/client_golang to v1.13.1 ([3780839](https://github.com/shift/domain_exporter/commit/37808393864f9a302e032374d829739d9d2383d7))
+
 ## [0.1.19](https://github.com/shift/domain_exporter/compare/v0.1.18...v0.1.19) (2022-08-06)
 
 
