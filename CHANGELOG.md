@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.24](https://github.com/shift/domain_exporter/compare/v0.1.23...v0.1.24) (2022-12-20)
+
+
+### Bug Fixes
+
+* **deps:** update module gopkg.in/yaml.v2 to v3 ([2e04e3b](https://github.com/shift/domain_exporter/commit/2e04e3be1dd2ad0f494951b7e34c869b20d39346))
+
 ## [0.1.23](https://github.com/shift/domain_exporter/compare/v0.1.22...v0.1.23) (2022-12-15)
 
 
