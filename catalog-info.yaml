@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: domain_exporter
+  annotations:
+    github.com/project-slug: shift/domain_exporter
+spec:
+  type: other
+  lifecycle: unknown
+  owner: guests
