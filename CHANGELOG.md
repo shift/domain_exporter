@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.25](https://github.com/shift/domain_exporter/compare/v0.1.24...v0.1.25) (2023-02-20)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/prometheus/common to v0.40.0 ([15326d0](https://github.com/shift/domain_exporter/commit/15326d06788438fe63dbbdfc91971223cf04c116))
+
 ## [0.1.24](https://github.com/shift/domain_exporter/compare/v0.1.23...v0.1.24) (2022-12-20)
 
 
