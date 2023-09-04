@@ -16,4 +16,4 @@ jobs:
           rm -rf ../chart/dashboards
           mkdir -p ../chart/dashboards
           jsonnet -J vendor -m ../chart/dashboards dashboards.jsonnet
-      - uses: EndBug/add-and-commit@v9.1.1
+      - uses: EndBug/add-and-commit@1bad3abcf0d6ec49a5857d124b0bfb52dc7bb081 # v9.1.3
