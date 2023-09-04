@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/shift/domain_exporter/compare/v0.1.25...v0.2.0) (2023-09-04)
+
+
+### Features
+
+* stop yaml truncating trailing 0 in float ([d94f6b2](https://github.com/shift/domain_exporter/commit/d94f6b22223535464b2b8c6d0446f9a1b24e4633))
+* using correct kingpin module path ([3c440d2](https://github.com/shift/domain_exporter/commit/3c440d2ef68e3edd4ae164afbae70bbb1e55d87b))
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/prometheus/common to v0.43.0 ([b028c12](https://github.com/shift/domain_exporter/commit/b028c129efdf694a1088e101c8ac30bd9c5513cd))
+
 ## [0.1.25](https://github.com/shift/domain_exporter/compare/v0.1.24...v0.1.25) (2023-02-20)
 
 
