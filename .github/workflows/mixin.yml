@@ -7,7 +7,7 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: kobtea/setup-jsonnet-action@v1
       - run: |
           cd mixin
