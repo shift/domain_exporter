@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/shift/domain_exporter/compare/v0.2.0...v0.2.1) (2025-06-13)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/go-kit/kit to v0.13.0 ([#119](https://github.com/shift/domain_exporter/issues/119)) ([5ddb6f5](https://github.com/shift/domain_exporter/commit/5ddb6f5be8e86c0bf1658927b993623b9159fe42))
+
 ## [0.2.0](https://github.com/shift/domain_exporter/compare/v0.1.25...v0.2.0) (2023-09-04)
 
 
