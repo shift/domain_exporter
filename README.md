@@ -31,6 +31,35 @@ We publish a docker image [on the Quay registry](https://quay.io/repository/shif
 
 [Here](contrib/k8s-domain-exporter.yaml) is an example Kubernetes deployment configuration for how to deploy the domain_exporter.
 
+### Probe Endpoint
+
+In addition to the `/metrics` endpoint which exposes metrics for the configured domains, the exporter also provides a `/probe` endpoint which allows on-demand querying of specific domains.
+
+Example usage:
+```
+http://localhost:9203/probe?target=google.com
+```
+
+### Prometheus Configuration
+
+You can configure Prometheus to use the domain_exporter with the following configuration:
+
+```yaml
+- job_name: 'domain-exporter'
+  metrics_path: /probe
+  static_configs:
+    - targets:
+      - google.com  # Target to probe with whois.
+      - facebook.com  # Target to probe with whois.
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: localhost:9203  # The domain exporter's real hostname:port.
+```
+
 ### Example Prometheus Alert
 
 The following alert will be triggered when domains expire within 45 days, or if
