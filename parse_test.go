@@ -59,3 +59,14 @@ func TestParsing(t *testing.T) {
 		}
 	}
 }
+
+func TestRequestForCOUsesCurrentRegistryWHOISServer(t *testing.T) {
+	req, err := requestForDomain("example.co")
+	if err != nil {
+		t.Fatalf("requestForDomain returned an error: %v", err)
+	}
+
+	if got, want := req.Host, "whois.registry.co"; got != want {
+		t.Errorf("request host = %q, want %q", got, want)
+	}
+}
