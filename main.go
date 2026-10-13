@@ -184,7 +184,7 @@ func parse(host string, res []byte) (float64, error) {
 }
 
 func lookup(domain string, handler *prometheus.GaugeVec, parsedExpiration *prometheus.GaugeVec) (float64, error) {
-	req, err := whois.NewRequest(domain)
+	req, err := requestForDomain(domain)
 	if err != nil {
 		return -1, err
 	}
@@ -210,4 +210,20 @@ func lookup(domain string, handler *prometheus.GaugeVec, parsedExpiration *prome
 	}
 
 	return date, nil
+}
+
+func requestForDomain(domain string) (*whois.Request, error) {
+	req := &whois.Request{Query: domain}
+
+	// .co moved its WHOIS service from whois.nic.co to whois.registry.co.
+	// Set the host before preparing the request so the generic WHOIS adapter
+	// constructs the request for the current registry endpoint.
+	if strings.HasSuffix(strings.ToLower(strings.TrimSuffix(domain, ".")), ".co") {
+		req.Host = "whois.registry.co"
+	}
+
+	if err := req.Prepare(); err != nil {
+		return nil, err
+	}
+	return req, nil
 }
